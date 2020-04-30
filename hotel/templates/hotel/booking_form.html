@@ -1,0 +1,6 @@
+{% extends 'hotel/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% csrf_token %}
+    {{ form }}
+{% endblock %}

@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel WebDev</title>
+    <link rel="stylesheet" typy="text/css" href="{% static 'hotel/main.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-yrfSO0DBjS56u5M+SjWTyAHujrkiYVtRYh2dtB3yLQtUz3bodOeialO59u5lUCFF" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
+    
+  </head>
+<body>
+    <!-- nav -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{% url 'hotel-home' %}">Hotel WebDev</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'hotel-home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'hotel-rooms' %}">Rooms</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'hotel-about' %}">About</a>
+          </li>
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+          </li>
+          {% endif %}
+          {% if request.user.is_staff %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'hotel-room-create' %}">Add Room</a>
+          </li>
+          {% endif %}
+        </ul>
+        <form method="GET" class="form-inline my-2 my-lg-0" action="{% url 'hotel-room-search' %}">
+          {% csrf_token %}
+          <input class="form-control mr-sm-2" type="text" name="searchroom" placeholder="Search">
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+      <!--end of nav-->
+
+  <div class="bg"></div>
+    <div class="container my-2">
+        {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-{{message.tags}}">
+            {{ message }}
+          </div>
+          {% endfor %}
+        {% endif %}
+        <div class="welcomemsg">
+          {% block content %}
+
+          {% endblock %}
+        </div>
+    </div>
+    
+<!-- START Bootstrap-Cookie-Alert -->
+<div class="alert text-center cookiealert" role="alert">
+<b>Do you like cookies?</b> &#x1F36A; We use cookies to ensure you get the best experience on our website. <a href="/cookies" target="_blank">Learn more</a>
+<button type="button" class="btn btn-primary btn-sm acceptcookies" aria-label="Close">I agree</button>
+</div>
+<!-- END Bootstrap-Cookie-Alert -->
+<script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

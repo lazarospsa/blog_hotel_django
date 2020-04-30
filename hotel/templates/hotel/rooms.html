@@ -1,0 +1,96 @@
+{% extends 'hotel/base.html' %}
+{% block content %}
+<!--
+
+
+  <style>
+  /* Float four columns side by side */
+  .column-rooms {
+    {% if rooms >= 4 %}
+      width: 25% !important;
+    {% elif rooms == 3 %}
+      width: 33% !important;
+    {% elif rooms == 2 %}
+      width: 50% !important;
+    {% else %}
+      width: 100% !important;
+    {% endif %}
+  }
+  </style>
+
+
+
+-->
+
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <h3>Rooms</h3>
+            <small class="text-muted">by Lazaros Psarokostas</small>
+        </div>
+        <h2><a class="article-title" href="#"></a></h2>
+        <p class="article-content">Our hotel is one of the best of the world!</p>
+    </div>
+</article>
+
+<div class="row">
+{% for room in rooms %}
+  <div class="column-rooms">
+      <div class="card mb-3">
+        <h3 class="card-header">
+          <a href="{% url 'hotel-room-detail' room.id %}">{{ room.title }}</a>
+        </h3>
+        <div class="card-body">
+          <h5 class="card-title">People: {{room.maxpeople}}</h5>
+          <h6 class="card-subtitle text-muted">{{room.roomtypes}}</h6>
+        </div>
+        <a href="{% url 'hotel-room-detail' room.id %}">
+        <img style="height: 200px; width: 100%; display: block;" src="{{ room.photoroom.url }}" alt="Card image">
+        </a>
+        <div class="card-body">
+          <p class="card-text">m2: {{ room.tetragwnika }}</p>
+          <p class="mt-4"><b>{{room.price}} €</b></p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><a href="{% url 'hotel-room-detail' room.id %}" class="card-link">Book Now!</a></li>
+        </ul>
+        <div class="card-body">
+          <a href="{% url 'hotel-room-detail' room.id %}" class="card-link">{{ room.title }}</a>
+        </div>
+        <div class="card-footer text-muted">
+          Email: contact@webdev.com
+        </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+<!-- START OF PAGINATION -->
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group mr-2" role="group" aria-label="First group">
+{% if is_paginated %}
+
+  {% if page_obj.has_previous %}
+    <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
+
+  {% for num in page_obj.paginator.page_range %}
+    {% if page_obj.number == num %}
+      <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+      <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+  {% endfor %}
+
+    {% if page_obj.has_next %}
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+
+{% endif %}
+</div>
+</div>
+<!-- END OF PAGINATION -->
+
+{% endblock %}

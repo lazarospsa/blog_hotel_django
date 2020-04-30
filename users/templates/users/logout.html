@@ -1,0 +1,11 @@
+{% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1>We will miss you :( </h1>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Do you want to login again? <a class="ml-w" href="{% url 'login' %}">Login</a>
+            </small>
+        </div>
+    </div>
+{% endblock %}

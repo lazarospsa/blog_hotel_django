@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+        <article class="media content-section">
+          <a class="mr-2" href="{% url 'user-posts' post.author.username %}">
+          <img style="height:40px;max-width:40px;margin-right: 20px;" class="rounded-circle account-img" src="{{ post.author.profile.photoprofile.url }}">
+          </a>
+          <div class="media-body">
+              <div class="article-metadata">
+                <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
+                <small class="text-muted">{{ object.date_posted|date:"d/m/Y H:s" }}</small>
+                {% if object.author == user %}
+                <div>
+                  <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Edit This Post</a>
+                  <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete This Post</a>
+                </div>
+                {% endif %}
+                <hr>
+              </div>
+              <h2 class="article-title" >{{ object.title }}</h2>
+              <p class="article-content">{{ object.content }}</p>
+            </div>
+        </article>
+{% endblock %}
+<!-- alla3a ola ta post.author se object.author epeidh to sugkekrimeno antikeimeno p anoi3a
+einai to sugkekrimeno post opote einai ena object-->

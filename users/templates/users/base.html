@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account</title>
+  <link rel="stylesheet" typy="text/css" href="{% static 'users/main.css' %}">
+  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-yrfSO0DBjS56u5M+SjWTyAHujrkiYVtRYh2dtB3yLQtUz3bodOeialO59u5lUCFF" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
+</head>
+<body>
+    <!-- nav -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Account</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+          {% if user.is_authenticated %}
+          <form  class="mr-2" action="/profile">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Profile</button>
+          </form>
+          <form class="form-inline my-2 my-lg-0" action="/logout">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Logout</button>
+          </form>
+          {% else %}
+          <form class="mr-2" action="/login"> <!--class="form-inline my-2 my-lg-0"-->
+            
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Login</button>
+          </form>
+          <form action="/register">
+            
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Register</button>
+          </form>
+          {% endif %}
+        </div>
+      </nav>
+      <!--end of nav-->
+    <div class="container my-2">
+        {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-{{message.tags}}">
+            {{ message }}
+          </div>
+          {% endfor %}
+        {% endif %}
+        <hr id="section1">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+        <!-- START Bootstrap-Cookie-Alert -->
+        <div class="alert text-center cookiealert" role="alert">
+            <b>Do you like cookies?</b> &#x1F36A; We use cookies to ensure you get the best experience on our website. <a href="/cookies" target="_blank">Learn more</a>
+
+            <button type="button" class="btn btn-primary btn-sm acceptcookies" aria-label="Close">
+                I agree
+            </button>
+        </div>
+        <!-- END Bootstrap-Cookie-Alert -->
+        <script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

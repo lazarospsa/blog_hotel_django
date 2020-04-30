@@ -1,0 +1,49 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+.bg{
+    background-image: url('/media/bgphoto.jpg');
+    /* Full height */
+    height: 95%;
+    z-index: 1;
+    /* Center and scale the image nicely */
+    background-position: fill;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/* Centered text */
+.welcomemsg {
+    color: white;
+    /*background-color: rgba(28, 141, 194, 0.096);*/
+    border-radius: 5%;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 2px 2px #000000;
+  }
+
+/* Centered text */
+.welcomemsg:hover {
+    text-shadow: 4px 4px #000000;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 4px;
+}
+      
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+       
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+      
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}

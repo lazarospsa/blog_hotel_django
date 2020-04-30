@@ -1,0 +1,16 @@
+<body>
+    <p>{{errors}}</p>
+
+    <form method="POST">
+    {% csrf_token %}
+    <h1>{{room.name}}</h1>
+    
+    <h3 >{{room.price}}</h3>
+    <h5 >{{room.desc}}</h5>
+    {% if room_id.reserve == True %}
+    <h4>This room has been reserved</h4>
+    {% else %}
+    <button name="confirm_reservation" type="submit">Reserve Room</button>
+    {% endif %}
+    </form>
+</body>

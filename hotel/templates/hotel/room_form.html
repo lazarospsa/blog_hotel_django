@@ -1,0 +1,20 @@
+{% extends 'hotel/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+            <div class="content-section">
+                <form method="post">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        {% if not room %}
+                        <legend class="border-bottom mb-4">New Room</legend>
+                        {% else %}
+                        <legend class="border-bottom mb-4">{{ room.title }}</legend>
+                        {% endif %}
+                        {{ form|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-info">Save</button>
+                    </div>
+                </form>
+            </div>
+{% endblock %}

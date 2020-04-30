@@ -1,0 +1,102 @@
+<style>
+  div.gallery {
+    border: 1px solid #ccc;
+  }
+  
+  div.gallery:hover {
+    border: 1px solid #777;
+  }
+  
+  div.gallery img {
+    width: 100%;
+    height: auto;
+  }
+  
+  div.desc {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  .responsive {
+    padding: 0 6px;
+    float: left;
+    width: 24.99999%;
+  }
+  
+  @media only screen and (max-width: 700px) {
+    .responsive {
+      width: 49.99999%;
+      margin: 6px 0;
+    }
+  }
+  
+  @media only screen and (max-width: 500px) {
+    .responsive {
+      width: 100%;
+    }
+  }
+  
+  .clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  </style>
+
+{% extends 'hotel/base.html' %}
+{% block content %}
+{% if user.is_staff %}
+<div>
+  <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'hotel-room-update' object.id %}">Edit This Room</a>
+  <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'hotel-room-delete' object.id %}">Delete This Room</a>
+</div>
+{% endif %}
+<hr>
+              <h2 class="article-title" >{{ object.title }}</h2>
+
+<!--start of mini nav-->
+              <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#home">Description</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#profile">Infos</a>
+                </li>
+              </ul>
+<!--end of mini nav-->
+              <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade show active" id="home">
+                  <div class="jumbotron">
+                  <p class="mt-4">{{ object.description }}</p>
+                  <p class="mt-4"><b>{{room.price}} €</b></p>
+                  <a class="btn btn-primary btn-lg" href="#" role="button">Book Now</a>
+                </div>
+                  <br>
+                  <div class="responsive">
+                      <div class="gallery">
+                          <img src="{{ room.photoroom.url }}" alt="Cinque Terre" width="800" height="600">
+                        <div class="desc">{{room.photodesc}}</div>
+                      </div>
+                    </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="tab-pane fade" id="profile">
+                  <div class="jumbotron">
+                    <h1 class="display-3">
+                      <p class="mt-4">{{ object.title }}</p></h1>
+                    <p class="lead">A comfortable room for {{room.maxpeople}} people, within {{room.tetragwnika}} m2.</p>
+                    <hr class="my-4">
+                    <p>{{ object.description }}</p>
+                    <p class="lead">
+                      <a class="btn btn-primary btn-lg" href="#" role="button">Book Now</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+{% endblock %}
+<!-- alla3a ola ta post.author se object.author epeidh to sugkekrimeno antikeimeno p anoi3a
+einai to sugkekrimeno post opote einai ena object-->

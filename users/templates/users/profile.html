@@ -1,0 +1,28 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        <img style="height:80px;max-width:80px;margin-right: 20px;" class="rounded-circle account-img" src="{{ user.profile.photoprofile.url }}">
+        <!--<img style="height:725px;max-width:500px;width: expression(this.width > 500 ? 500: true);" id="img_DocPreview" src="Images/empty.jpg" />-->
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <p class="text-secondary">{{ user.email }}</p>
+        </div>
+      </div>
+      <!-- FORM HERE -->
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Profile Info</legend>
+            {{ u_form|crispy }}
+            {{ p_form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-info">Update</button>
+            <a class="btn btn-outline-info" href="{% url 'blog-home' %}">Go to Blog</a>
+            <a class="btn btn-outline-info" href="{% url 'hotel-home' %}">Go to Hotel</a>
+        </div>
+      </form>
+    </div>
+{% endblock content %}
