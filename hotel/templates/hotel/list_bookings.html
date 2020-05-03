@@ -25,46 +25,31 @@
 <article class="media content-section">
     <div class="media-body">
         <div class="article-metadata">
-            <h3>Rooms</h3>
+            <h3>Bookings List</h3>
             <small class="text-muted">by Lazaros Psarokostas</small>
         </div>
         <h2><a class="article-title" href="#"></a></h2>
         <p class="article-content">Our hotel is one of the best of the world!</p>
     </div>
 </article>
-
-<div class="row">
-{% for room in rooms %}
-  <div class="column-rooms">
-      <div class="card mb-3">
-        <h3 class="card-header">
-          <a href="{% url 'hotel-room-detail' room.id %}">{{ room.title }}</a>
-        </h3>
-        <div class="card-body">
-          <h5 class="card-title">People: {{room.maxpeople}}</h5>
-          <h6 class="card-subtitle text-muted">{{room.roomtypes}}</h6>
-        </div>
-        <a href="{% url 'hotel-room-detail' room.id %}">
-        <img style="height: 200px; width: 100%; display: block;" src="{{ room.photoroom.url }}" alt="Card image">
-        </a>
-        <div class="card-body">
-          <p class="card-text">m2: {{ room.tetragwnika }}</p>
-          <p class="mt-4"><b>{{room.price}} €</b></p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><a href="{% url 'hotel-room-booking' room.id %}" class="card-link">Book Now!</a></li>
-        </ul>
-        <div class="card-body">
-          <a href="{% url 'hotel-room-detail' room.id %}" class="card-link">{{ room.title }}</a>
-        </div>
-        <div class="card-footer text-muted">
-          Email: contact@webdev.com
-        </div>
-    </div>
-  </div>
+<table border="1px">
+    <tr>
+        <th>Customer</th>
+        <th>Room</th>
+        <th>Date In</th>
+        <th>Date Out</th>
+        <th>Booking Time</th>
+    </tr>
+    <tr>
+{% for booking in bookings %}
+<td>{{booking.customer}}</td>
+<td>{{booking.room_id}}</td>
+<td>{{booking.datein}}</td>
+<td>{{booking.dateout}}</td>
+<td>{{booking.date_posted}}</td>
 {% endfor %}
-</div>
-
+</tr>
+</table>
 <!-- START OF PAGINATION -->
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
   <div class="btn-group mr-2" role="group" aria-label="First group">

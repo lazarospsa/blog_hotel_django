@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from hotel.models import Room
+from hotel.models import Room, Booking
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
@@ -17,6 +17,30 @@ def home(request):
 
 def about(request):
     return render(request, 'hotel/about.html')
+
+def thanks(request):
+    return render(request, 'hotel/thanks.html')
+
+class BookRoomView(DetailView):
+    model = Booking
+
+class BookCreateView(LoginRequiredMixin, CreateView):
+    model = Booking
+    fields = ['datein', 'dateout']
+
+    def form_valid(self, form):
+        form.instance.room_id = Room.objects.get(pk=self.kwargs.get('pk'))
+        print(self.kwargs.get('pk'))
+        form.instance.customer = self.request.user
+        return super().form_valid(form)
+
+        '''
+    model = Room
+    fields = ['title', 'description', 'price', 'maxpeople', 'tetragwnika', 'roomtypes', 'photoroom']
+    
+    def form_valid(self, form):
+        return super().form_valid(form)
+        '''
 
 class RoomDetailView(DetailView):
     model = Room
@@ -43,6 +67,16 @@ class RoomListView(ListView):
     #<app>/<model>_<viewtype>.html <- auto psaxnei alla gia na to orisoume emeis diko mas template kanw template_name = 'blog/home.html'
     context_object_name = 'rooms'
     ordering = ['-price']
+    #edw 9a valoume paginator (selidopoihsh)
+    paginate_by = 4
+
+@method_decorator(staff_member_required, name='dispatch')
+class BookingsListView(LoginRequiredMixin, ListView):
+    model = Booking
+    template_name = 'hotel/list_bookings.html'
+    #<app>/<model>_<viewtype>.html <- auto psaxnei alla gia na to orisoume emeis diko mas template kanw template_name = 'blog/home.html'
+    context_object_name = 'bookings'
+    ordering = ['-date_posted']
     #edw 9a valoume paginator (selidopoihsh)
     paginate_by = 4
 

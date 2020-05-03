@@ -73,7 +73,7 @@
                   <div class="jumbotron">
                   <p class="mt-4">{{ object.description }}</p>
                   <p class="mt-4"><b>{{room.price}} €</b></p>
-                  <a class="btn btn-primary btn-lg" href="#" role="button">Book Now</a>
+                  <a class="btn btn-primary btn-lg" href="{% url 'hotel-room-booking' room.id %}" role="button">Book Now</a>
                 </div>
                   <br>
                   <div class="responsive">
@@ -92,7 +92,7 @@
                     <hr class="my-4">
                     <p>{{ object.description }}</p>
                     <p class="lead">
-                      <a class="btn btn-primary btn-lg" href="#" role="button">Book Now</a>
+                      <a class="btn btn-primary btn-lg" href="{% url 'hotel-room-booking' room.id %}" role="button">Book Now</a>
                     </p>
                   </div>
                 </div>

@@ -54,3 +54,18 @@ class Room(models.Model):
     class Meta:
        verbose_name = 'Room'
        verbose_name_plural = 'Rooms'
+
+
+class Booking(models.Model):
+    datein = models.DateField(default=timezone.now)
+    dateout = models.DateField(default=timezone.now)
+    date_posted = models.DateTimeField(default=timezone.now)
+    room_id = models.ForeignKey(Room, on_delete=models.CASCADE, default=1)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.customer.username} booking the {self.room_id} at {self.date_posted:%d %B, %Y. %I:%M:%S %p}'
+        #return f'{self.customer.username} booking the {self.room_id} for {self.datein} ~ {self.dateout} at {self.date_posted:%d %B, %Y. %I:%M:%S %p}'
+    
+    def get_absolute_url(self):
+        return reverse('hotel-thanks')
