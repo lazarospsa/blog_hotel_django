@@ -51,7 +51,7 @@ class Room(models.Model):
     def get_absolute_url(self):
         return reverse('hotel-room-detail', kwargs={'pk':self.pk})
     
-    class Meta:
+    class Meta():
        verbose_name = 'Room'
        verbose_name_plural = 'Rooms'
 
