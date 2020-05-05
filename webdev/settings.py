@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig', # to app pou eftia3a blog
     'hotel.apps.HotelConfig', # to app pou efita3a hotel
     'users.apps.UsersConfig', # to app pou eftia3a users
+    'rest_framework', # to module pip install djangorestframework + pip install django-filter
+    'restapi.apps.RestapiConfig', #rest api app
     'crispy_forms', #app gia tis formes na tis kanei omorfoteres
 ]
 
@@ -149,3 +151,12 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'larroukossnail@gmail.com'
 EMAIL_HOST_PASSWORD = 'hsvvvtstmfmlpvac'
 #hsvvvtstmfmlpvac <-django_application google password because i have enabled the two factor authentication
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+}

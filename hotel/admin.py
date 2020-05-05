@@ -12,6 +12,7 @@ admin.site.site_header = 'Admin Controller'
 class RoomAdmin(admin.ModelAdmin):
     list_display = ('title','price')
     list_filter = ('price', 'is_reserved', 'roomtypes')
+    list_editable = ['price']
     change_list_template = 'admin/hotel/rooms_change_list.html'
 
 class BookingAdmin(admin.ModelAdmin):
