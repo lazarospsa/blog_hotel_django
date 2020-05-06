@@ -3,8 +3,6 @@ from restapi.serializers import RoomSerializer
 from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 
-# Create your views here.
-
 class RoomListCreate(generics.ListCreateAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer

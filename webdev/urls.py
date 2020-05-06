@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
-from users import views as user_views #eisagagw to view tou app users
-from django.contrib.auth import views as auth_views #automates login selides kai logout
+from users import views as user_views
+from django.contrib.auth import views as auth_views
 
-from django.conf import settings            #auta ta duo ta eisagoume gia na mporoume na serviroume
-from django.conf.urls.static import static  #static arxeia opws oi photos profile
+from django.conf import settings
+from django.conf.urls.static import static
 
 from chooser import views
 
@@ -38,12 +38,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     re_path(r'api/hotel/', include('restapi.urls')),
 ]
-'''
-edw leme EAN to project trexei se debug mode (apo ta settings tou project) tote pros9ese
-static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-sthn metavlhth urlpatterns
 
-*epeidh den susthnete na xrhsimopoioume auth thn texnikh gia production
-'''
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

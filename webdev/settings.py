@@ -135,15 +135,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #full path to store the files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4' #settings to crispy-forms app gia na eisagei to bootstrap4
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = '/' #edw orizw to pou 9a ginetai redirect molis o xrhsths kanei succesfully login
-LOGIN_URL = 'login' #edw dhlwnoume to pou 9a phgainei automata ton xrhsth pou prospa9ei na mpei se selida p prepei na einai sundedemenos gia na thn dei
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
 
-#settings gia epanafora password
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
@@ -153,8 +152,6 @@ EMAIL_HOST_PASSWORD = 'hsvvvtstmfmlpvac'
 #hsvvvtstmfmlpvac <-django_application google password because i have enabled the two factor authentication
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
